@@ -55,7 +55,7 @@ productRoutes.get('/category/:idCategory', async (req, res) => {
     let products
     const categoryId = req.params.idCategory;           
     const subCategory = await Subcategory.findAll({where: {categoryId: categoryId}})   
-    res.send(subCategory)
+   
     subCategory.length ?
     (
         products = await Product.findAll({where: {subcategoryId: subCategory[0].id}}),
