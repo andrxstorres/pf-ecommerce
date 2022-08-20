@@ -49,12 +49,13 @@ productRoutes.get("/", async (req, res) => {
     res.status(200).json({ data: lista })
 })
 
-//get products by categoryId
+//Get products by categoryId
+//Query 
 productRoutes.get('/category/:idCategory', async (req, res) => {
     let products
     const categoryId = req.params.idCategory;           
     const subCategory = await Subcategory.findAll({where: {categoryId: categoryId}})   
-    
+    res.send(subCategory)
     subCategory.length ?
     (
         products = await Product.findAll({where: {subcategoryId: subCategory[0].id}}),
@@ -64,7 +65,5 @@ productRoutes.get('/category/:idCategory', async (req, res) => {
     : res.send('No hay resultados.')
   
 })
-
-
 
 module.exports = { productRoutes }
