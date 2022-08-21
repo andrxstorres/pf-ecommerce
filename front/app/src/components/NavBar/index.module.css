@@ -37,6 +37,22 @@
  height: 40px;
 }
 
+<<<<<<< HEAD
 .sectionTwo {
  display: flex;
+=======
+.navButtons {
+ display: flex;
+ flex-direction: row;
+ justify-content: space-between;
+ width: 450px;
+}
+
+/* .sectionTwo {
+ display: block;
+} */
+
+.cartNumber {
+ display: inline;
+>>>>>>> 9a465cf1474bc35bdf14a773dbe88451e0a43e27
 }
