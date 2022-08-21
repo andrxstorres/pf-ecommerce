@@ -27,26 +27,26 @@ productRoutes.post("/", postProduct)
 
 productRoutes.get('/productsWithCategories', async (req, res) => {
 
-const products = await Product.findAll()
-.then((data)=> {
-    const subcategories = []
-    data.map(product=> {
-      !subcategories.includes(product.subcategoryId)
-      ? subcategories.push(product.subcategoryId)    
-      : null 
-    })
-    const subcategory = Subcategory.findAll({         
-        where: {            
-            id: subcategories
-          }            
-    })
-    .then((subcategory)=> res.send(subcategory)
-    )
-    })
-   // .then ((data)=> data.map(element=> console.log(element)))
-
-    
-    
+  const products = await Product.findAll()
+  .then((data)=> {
+      const subcategories = []
+      data.map(product=> {
+        !subcategories.includes(product.subcategoryId)
+        ? subcategories.push(product.subcategoryId)    
+        : null 
+      })
+      const subcategory = Subcategory.findAll({         
+          where: {            
+              id: subcategories
+            }            
+      })
+      .then((subcategory)=> res.send(subcategory)
+      )
+      })
+     // .then ((data)=> data.map(element=> console.log(element)))
+  
+      
+      
         
         
         // {
