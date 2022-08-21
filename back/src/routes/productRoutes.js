@@ -1,29 +1,29 @@
 const { Router } = require("express")
 //controllers
-// const {
-//     postProduct,
-//     getProducts,    
-//     getProductsByCategoryId,
-//     productsWithCategories,
-//     getProductsBySubcategoryId,
-//     getProductById } = require("../controllers/productControllers")
+const {
+    postProduct,
+    getProducts,    
+    getProductsByCategoryId,
+    productsWithCategories,
+    getProductsBySubcategoryId,
+    getProductById } = require("../controllers/productControllers")
     
     //middlewares
-    //const { validQueryGetProducts } = require("../middlewares/validQueryGetProducts")
-    //const { validIdParam } = require("../middlewares/validIdParam")
+    const { validQueryGetProducts } = require("../middlewares/validQueryGetProducts")
+    const { validIdParam } = require("../middlewares/validIdParam")
 
     const { Product, Category, Subcategory } = require("../db")
     const { Op, where } = require("sequelize")
-//const { where } = require("sequelize/types")
+    
 
 const productRoutes = Router()
 
-//productRoutes.post("/", postProduct)
+productRoutes.post("/", postProduct)
 
-// productRoutes.get('/:id', validIdParam, getProductById)
+productRoutes.get('/:id', validIdParam, getProductById)
 
 //validando los datos ingresados por el query con un middleware "validQueryGetProducts"
-//productRoutes.get("/", validQueryGetProducts, getProducts)
+productRoutes.get("/", validQueryGetProducts, getProducts)
 
 productRoutes.get('/productsWithCategories', async (req, res) => {
    const title = req.query.title
@@ -38,13 +38,6 @@ productRoutes.get('/productsWithCategories', async (req, res) => {
             title: {
               [Op.like]: '%' + title + '%'
             }
-            
-            // ,
-
-            // title: {
-            //   [Op.like]: '%' + title[0].toUpperCase() + title.substring(1) + '%'
-            // }
-            
           }
         }) 
         
@@ -76,14 +69,10 @@ Subcategory.findAll({
 
 .then((categories)=> { 
 
-  
-
   Category.findAll({
     attributes: ['id', 'name'],
     where: {            
-      id: categories.map(categorie => categorie.categoryId)
-      //id: categories[0].categoryId
-      //id: 'ef3104ab-93fa-4015-a7af-983d64714f95'
+      id: categories.map(categorie => categorie.categoryId)     
     }    
   }) 
 
@@ -97,13 +86,6 @@ Subcategory.findAll({
 
 })
 
-// .then((categories)=> {
-//     results.push(categories)  
-//     res.status(200).send(results)
-//     }) 
-// })
-
-// })
       
  
 //validando los datos ingresados por el query con un middleware "validQueryGetProducts"
@@ -111,26 +93,26 @@ Subcategory.findAll({
  
 //Get products by categoryId
 //Query 
-// productRoutes.get('/category/:idCategory', async (req, res) => {
-//     let products
-//     const categoryId = req.params.idCategory;           
-//     const subCategory = await Subcategory.findAll({where: {categoryId: categoryId}})   
+productRoutes.get('/category/:idCategory', async (req, res) => {
+    let products
+    const categoryId = req.params.idCategory;           
+    const subCategory = await Subcategory.findAll({where: {categoryId: categoryId}})   
    
-//     subCategory.length ?
-//     (
-//         products = await Product.findAll({where: {subcategoryId: subCategory[0].id}}),
-//         res.send(products)
-//     )
+    subCategory.length ?
+    (
+        products = await Product.findAll({where: {subcategoryId: subCategory[0].id}}),
+        res.send(products)
+    )
     
-//     : res.send('No hay resultados.')
+    : res.send('No hay resultados.')
   
-// })
+})
 
  
-//productRoutes.get('/category/:id', validIdParam, validQueryGetProducts, getProductsByCategoryId)
+productRoutes.get('/category/:id', validIdParam, validQueryGetProducts, getProductsByCategoryId)
 
 //validando los datos ingresados por el query con un middleware "validQueryGetProducts"
-//productRoutes.get('/subcategory/:id', validIdParam, validQueryGetProducts, getProductsBySubcategoryId)
+productRoutes.get('/subcategory/:id', validIdParam, validQueryGetProducts, getProductsBySubcategoryId)
 
 
 

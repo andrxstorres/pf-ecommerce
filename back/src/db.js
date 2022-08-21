@@ -37,8 +37,8 @@ Subcategory.belongsTo(Category, { as: "category" })
 Subcategory.hasMany(Product, { as: "products" })
 Product.belongsTo(Subcategory, { as: "subcategory" })
 
-Category.hasMany(Product, { as: "products" })
-Product.belongsTo(Category, { as: "category" })
+// Category.hasMany(Product, { as: "products" })
+// Product.belongsTo(Category, { as: "category" })
 
 
 
