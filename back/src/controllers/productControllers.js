@@ -48,6 +48,29 @@ const getProducts = async (req = request, res = response) => {
 
 }
 
+// const getProductsWithCategory = async (req = request, res = response) => {
+
+//     const { limit = 30, page = 1 } = req.query
+//     const currentPage = Number(page)
+//     const offset = limit * (currentPage - 1)
+//     //generando el where y el order con una funcion helper que los crea mediante el query
+//     const { where, order } = createWhereAndOrder(req.query)
+//     const { count, rows } = await Product.findAndCountAll({
+//         where,
+//         order,
+//         limit,
+//         offset
+//     })
+//     const totalPages = Math.ceil(count / limit)
+
+//     return res.status(200).json({ totalPages, currentPage, totalResults: count, data: rows })
+
+
+
+
+// }
+
+
 
 const getProductById = async(req = request, res = response) => {
     const { id } = req.params;
@@ -120,7 +143,7 @@ const deleteProduct = (req = request, res = response) => {
 }
 module.exports = {
     postProduct,
-    getProducts,
+    getProducts,    
     getProductById,
     getProductsByCategoryId,
     getProductsBySubcategoryId,
