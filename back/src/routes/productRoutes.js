@@ -4,13 +4,12 @@ const {
     postProduct,
     getProducts,    
     getProductsByCategoryId,
-    productsWithCategories,
     getProductsBySubcategoryId,
     getProductById } = require("../controllers/productControllers")
     
     //middlewares
-    const { validQueryGetProducts } = require("../middlewares/validQueryGetProducts")
-    const { validIdParam } = require("../middlewares/validIdParam")
+     const { validQueryGetProducts } = require("../middlewares/validQueryGetProducts")
+     const { validIdParam } = require("../middlewares/validIdParam")
 
     const { Product, Category, Subcategory } = require("../db")
     const { Op, where } = require("sequelize")
@@ -18,79 +17,69 @@ const {
 
 const productRoutes = Router()
 
+
+productRoutes.get("/productsWithCategories", async (req, res) => {
+  const title = req.query.title;
+  const results = [];
+  let products;
+
+  function conditionalChaining(title) {
+    if (title) {
+      const promise = Product.findAll({
+        where: {
+          title: {
+            [Op.like]: "%" + title + "%",
+          },
+        },
+      });
+
+      if (promise) return promise;
+    } else {
+      return Product.findAll();
+    }
+  }
+
+  conditionalChaining(title).then((data) => {
+    results.push(data);
+    const subcategories = [];
+
+    data.map((product) => {
+      if (!subcategories.includes(product.subcategoryId)) {
+        subcategories.push(product.subcategoryId);
+      }
+    });
+
+    Subcategory.findAll({
+      attributes: ["categoryId"],
+      where: {
+        id: subcategories,
+      },
+    })
+    .then((categories) => {
+      Category.findAll({
+        attributes: ["id", "name"],
+        where: {
+          id: categories.map((categorie) => categorie.categoryId),
+        },
+      })
+      .then((categories) => {
+        results.push(categories);
+        res.send(results);
+      });
+    });
+  });
+});
+
 productRoutes.post("/", postProduct)
 
 productRoutes.get('/:id', validIdParam, getProductById)
+ 
 
 //validando los datos ingresados por el query con un middleware "validQueryGetProducts"
 productRoutes.get("/", validQueryGetProducts, getProducts)
 
-productRoutes.get('/productsWithCategories', async (req, res) => {
-   const title = req.query.title
-   const results = []
-   let products   
-
-  function conditionalChaining(title){    
-    if (title) {              
-      
-        const promise = Product.findAll({
-          where: {                      
-            title: {
-              [Op.like]: '%' + title + '%'
-            }
-          }
-        }) 
-        
-        if (promise) return promise
-     
-
-    } else {         
-        return Product.findAll() ;
-    } 
-} 
  
-conditionalChaining(title).then((data)=>{ 
- 
-    results.push(data)
-    const subcategories = []
-    
-   data.map(product => {
-    if (!subcategories.includes(product.subcategoryId)){
-      subcategories.push(product.subcategoryId)          
-    }
-  })
-
-Subcategory.findAll({
-        attributes: ['categoryId'],         
-          where: {            
-              id: subcategories
-            }            
-      })
-
-.then((categories)=> { 
-
-  Category.findAll({
-    attributes: ['id', 'name'],
-    where: {            
-      id: categories.map(categorie => categorie.categoryId)     
-    }    
-  }) 
-
-.then((categories)=> {
-  results.push(categories)
-  res.send(results)
-})
-
-})
-})
-
-})
-
-      
- 
-//validando los datos ingresados por el query con un middleware "validQueryGetProducts"
-
- 
+//validando los datos ingresados por el query con un middleware "validQueryGetProducts" 
 //Get products by categoryId
 //Query 
 productRoutes.get('/category/:idCategory', async (req, res) => {
