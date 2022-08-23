@@ -7,6 +7,7 @@ import { getCategories, getCategoryProductsById, getSearchCategory, getSearchNam
 import SearchBar from "../SearchBar";
 
 import style from "./index.module.css";
+import SignInGoogle from "../SignInGoogle/SigInGoogle";
 
 export default function NavBar() {
  const dispatch = useDispatch();
@@ -104,6 +105,9 @@ export default function NavBar() {
      {/* <p className={style.cartNumber}>{}</p> */}
     </div>
    </div>
+    <div>
+      <SignInGoogle/>
+    </div>
   </header>
  );
 }

@@ -4,7 +4,6 @@ import NavBar from "../../components/NavBar";
 import Footer from "../../components/Footer";
 
 import style from "./index.module.css";
-import SignInGoogle from "../../components/SignInGoogle/SigInGoogle";
 
 export default function Landing() {
  return (
@@ -15,7 +14,6 @@ export default function Landing() {
     <LandingProducts />
     <br />
    </div>
-   <SignInGoogle/>
    <Footer />
   </div>
  );
