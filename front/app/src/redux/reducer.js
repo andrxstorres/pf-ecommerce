@@ -229,6 +229,7 @@ export const reducer = (state = initialState, action) => {
         dataPayment: action.payload,
       };
     }
+    
     case CLEAR_CART: {
       return {
         ...state,
