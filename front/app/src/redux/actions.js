@@ -27,6 +27,9 @@ export const CLEAR_CART = "CLEAR_CART";
 export const ADD_ONE_FROM_CART = "ADD_ONE_FROM_CART";
 export const GET_TOTAL = "GET_TOTAL";
 
+//PAYMENT
+export const SEND_PAYMENT = "SEND_PAYMENT";
+
 const BASE_URL = `http://localhost:3001`;
 
 export const getProducts = () => {
@@ -259,5 +262,19 @@ export const postUser = (newUser) => {
       .catch((err) =>
         console.log({ m: "Error on postUser action creator", err })
       );
+  };
+};
+
+export const sendPayment = (dataPayment) => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.post(`${BASE_URL}/payment`, dataPayment);
+      return dispatch({
+        type: SEND_PAYMENT,
+        payload: response,
+      });
+    } catch (error) {
+      console.log("Error, can not fetch payment", { error: error });
+    }
   };
 };

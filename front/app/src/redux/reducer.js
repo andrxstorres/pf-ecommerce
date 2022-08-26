@@ -18,6 +18,7 @@ import {
   CLEAR_CART,
   ADD_ONE_FROM_CART,
   GET_TOTAL,
+  GET_PAYMENT_POST,
 } from "./actions";
 
 const initialState = {
@@ -34,6 +35,7 @@ const initialState = {
     ? JSON.parse(localStorage.getItem("cart"))
     : [],
   cartTotal: 0,
+  dataPayment: {},
 };
 
 export const reducer = (state = initialState, action) => {
@@ -216,6 +218,12 @@ export const reducer = (state = initialState, action) => {
           ...state,
         };
       }
+    }
+    case GET_PAYMENT_POST: {
+      return {
+        ...state,
+        dataPayment: action.payload,
+      };
     }
     case CLEAR_CART: {
       return {
