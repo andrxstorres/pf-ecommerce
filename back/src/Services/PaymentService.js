@@ -43,11 +43,8 @@ class PaymentService {
               },
               "back_urls": {
                 "success": "http://localhost:3000",			         
-              },
-              //notification_url: "https://mercadopago-checkout.herokuapp.com/webhook",               
-              notification_url: "http://localhost:3001/api/webhook", 
-                           
-              
+              },              
+              notification_url: "http://localhost:3001/api/webhook",                                         
           		auto_return: "approved",
               "differential_pricing": {},
               "metadata": {}             

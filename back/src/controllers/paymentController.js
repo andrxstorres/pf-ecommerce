@@ -14,7 +14,8 @@ async getPaymentLink(req, res){
     }
   }
 
-  webhook(req, res) {     
+  webhook(req, res) {  
+    res.send("llegó")   
     if (req.method === "POST") { 
       let body = ""; 
       req.on("data", chunk => {  
