@@ -20,7 +20,7 @@ class PaymentService {
         const url = "https://api.mercadopago.com/checkout/preferences";
 
         const body = {
-            payer_email: "test_user46945293@testuser.com",            
+            payer_email: "arielbujeiro2@gmail.com",            
             "items": items,
               "payer": {
                 "phone": {},
@@ -43,7 +43,10 @@ class PaymentService {
               },
               "back_urls": {
                 "success": "http://localhost:3000",			         
-              },              
+              },
+              //notification_url: "https://mercadopago-checkout.herokuapp.com/webhook",               
+              notification_url: "https://localhost:3000/webhook",               
+              
           		auto_return: "approved",
               "differential_pricing": {},
               "metadata": {}             
