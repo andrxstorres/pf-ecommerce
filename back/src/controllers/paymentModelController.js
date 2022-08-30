@@ -12,8 +12,8 @@ let order = {
   try {
     const newOrder = await Order.create(order);
     const orderDetail = req.body.products.map((product) => {
-      return (product = {        
-        id_product: product.product.id,
+      return (product = {  
+        productId: product.product.id,
         quantity: product.amount,
         price: product.product.price,
         orderId: newOrder.id,
@@ -24,7 +24,7 @@ let order = {
     return newOrder.id
   }
    catch (error) {
-     res.status(500).json({ error: error });
+    res.status(500).json({ error: error });
   }
 
 };
