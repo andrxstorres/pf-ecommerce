@@ -21,7 +21,7 @@ let order = {
     });
     
     const newOrderDetail = await Orderdetail.bulkCreate(orderDetail);    
-   
+    return newOrder.id
   }
    catch (error) {
      res.status(500).json({ error: error });
