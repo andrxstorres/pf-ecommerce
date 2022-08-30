@@ -20,7 +20,7 @@ class PaymentService {
         const url = "https://api.mercadopago.com/checkout/preferences";
 
         const body = {
-            payer_email: "arielbujeiro2@gmail.com",            
+            "payer_email": "arielbujeiro2@gmail.com",            
             "items": items,
               "payer": {
                 "phone": {},

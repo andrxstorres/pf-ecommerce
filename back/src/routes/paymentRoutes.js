@@ -19,6 +19,7 @@ paymentRoutes.post("/", function(req, res, next){
   .then (() => PaymentInstance.getPaymentLink(req,res))      
 })
 
+
 module.exports = {
     paymentRoutes
 }
