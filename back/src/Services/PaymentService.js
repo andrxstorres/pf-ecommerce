@@ -43,10 +43,10 @@ class PaymentService {
               },
               "back_urls": {                
               //"success": "http://localhost:3000"				                        
-               "success": "https://pf-ecommerce-ebon.vercel.app",			         
+               "success": "ecommerce-soyhenry.ml",			         
                //"success": "https://pf-ecommerce-ebon.vercel.app",
-              "failure": "https://pf-ecommerce-ebon.vercel.app",
-              "pending": "https://pf-ecommerce-ebon.vercel.app"				         
+              "failure": "ecommerce-soyhenry.ml",
+              "pending": "ecommerce-soyhenry.ml"				         
                //"pending": "http://localhost:3000"				                        
               },              
           		"auto_return": "approved",
